@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en" data-theme="sky">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#b8eff8">
+  <meta name="description" content="Katy Yurash is a Bay Area cartoonist and digital artist. Explore character art, illustration, and creative projects.">
+  <title>Katy Yurash | Cartoonist &amp; Digital Artist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --red: #f04b56;
+      --red-dark: #d93442;
+      --blue: #173d5b;
+      --ink: #18384f;
+      --muted: #38566b;
+      --cream: #b8eff8;
+      --yellow: #f5eb36;
+      --sky: #aeeaf6;
+      --white: #fff;
+    }
+    :root[data-theme="sunset"] {
+      --red: #e65343;
+      --red-dark: #c83d36;
+      --blue: #603752;
+      --ink: #4b3045;
+      --muted: #705368;
+      --cream: #fff0e2;
+      --yellow: #ffcf55;
+      --sky: #ffd9bd;
+    }
+    :root[data-theme="lavender"] {
+      --red: #ec668f;
+      --red-dark: #d84e7b;
+      --blue: #3b2c68;
+      --ink: #352c55;
+      --muted: #64567c;
+      --cream: #f5f0ff;
+      --yellow: #f7ea79;
+      --sky: #e6dcff;
+    }
+    :root[data-theme="mint"] {
+      --red: #ef7658;
+      --red-dark: #d85b48;
+      --blue: #205451;
+      --ink: #1d4947;
+      --muted: #476c63;
+      --cream: #f2fff1;
+      --yellow: #ffe075;
+      --sky: #c9f2d6;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Montserrat", sans-serif;
+      background: var(--sky);
+    }
+    .viewport-checker {
+      position: fixed;
+      z-index: 10;
+      pointer-events: none;
+      background: repeating-conic-gradient(#000 0 25%, #fff 0 50%) 0 0 / 16px 16px;
+    }
+    .viewport-checker-top, .viewport-checker-bottom {
+      right: 0;
+      left: 0;
+      height: 16px;
+    }
+    .viewport-checker-top { top: 0; }
+    .viewport-checker-bottom { bottom: 0; }
+    .viewport-checker-left, .viewport-checker-right {
+      top: 0;
+      bottom: 0;
+      width: 16px;
+    }
+    .viewport-checker-left { left: 0; }
+    .viewport-checker-right { right: 0; }
+    a { color: inherit; }
+    button, input, textarea { font: inherit; }
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 4px;
+    }
+    .site-header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 82px;
+      padding: 0 max(28px, calc((100vw - 1160px) / 2));
+      background: var(--sky);
+    }
+    .brand {
+      font-family: "Lilita One", "Arial Rounded MT Bold", sans-serif;
+      display: grid;
+      gap: 2px;
+      color: var(--blue);
+      font-size: clamp(18px, 2vw, 25px);
+      font-weight: 1000;
+      letter-spacing: .015em;
+      text-decoration: none;
+    }
+    .brand span { color: var(--blue); font-size: 9px; letter-spacing: .13em; }
+    .site-nav { display: flex; align-items: center; gap: 10px; }
+    .site-nav a {
+      color: var(--ink);
+      padding: 8px 15px;
+      border: 2px solid var(--blue);
+      border-radius: 20px;
+      background: var(--sky);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .site-nav a:first-child { border-color: var(--blue); background: var(--yellow); }
+    .site-nav a:hover { background: var(--yellow); }
+    .header-tools { display: flex; align-items: center; gap: 18px; }
+    .theme-picker { display: flex; align-items: center; gap: 7px; }
+    .theme-picker-label {
+      color: var(--blue);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .theme-swatch {
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      border: 2px solid var(--blue);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .theme-swatch[data-theme-choice="sky"] { background: linear-gradient(135deg, #aeeaf6 0 50%, #f5eb36 50%); }
+    .theme-swatch[data-theme-choice="sunset"] { background: linear-gradient(135deg, #ffd9bd 0 50%, #e65343 50%); }
+    .theme-swatch[data-theme-choice="lavender"] { background: linear-gradient(135deg, #e6dcff 0 50%, #ec668f 50%); }
+    .theme-swatch[data-theme-choice="mint"] { background: linear-gradient(135deg, #c9f2d6 0 50%, #ef7658 50%); }
+    .theme-swatch[aria-pressed="true"] {
+      box-shadow: 0 0 0 2px var(--sky), 0 0 0 4px var(--blue);
+    }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: var(--blue);
+      background: var(--sky);
+    }
+    .hero-inner {
+      width: min(100% - 56px, 1160px);
+      min-height: 420px;
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      align-items: center;
+      gap: clamp(36px, 7vw, 85px);
+      margin: 0 auto;
+      padding: 42px 0 54px;
+    }
+    .eyebrow, .section-label {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .hero .eyebrow {
+      display: table;
+      padding: 5px 9px;
+      border: 2px solid var(--blue);
+      background: var(--yellow);
+      color: var(--blue);
+      font-size: 10px;
+      letter-spacing: .08em;
+      box-shadow: 2px 2px 0 var(--blue);
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: "Lilita One", "Arial Rounded MT Bold", sans-serif; }
+    .hero h1 {
+      max-width: 510px;
+      margin: 13px 0 14px;
+      color: var(--blue);
+      font-size: clamp(39px, 5.2vw, 64px);
+      font-weight: 400;
+      letter-spacing: -.035em;
+      line-height: .91;
+      text-shadow: 1px 2px 0 rgb(23 61 91 / 12%);
+      text-transform: uppercase;
+    }
+    .hero-copy > p:not(.eyebrow) {
+      max-width: 440px;
+      margin-bottom: 17px;
+      color: var(--blue);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 16px;
+      border: 3px solid var(--blue);
+      border-radius: 10px;
+      background: var(--red);
+      box-shadow: 3px 3px 0 var(--blue);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+    }
+    .button:hover { box-shadow: 1px 1px 0 var(--blue); transform: translate(2px, 2px); }
+    .button-outline { border-color: var(--blue); background: var(--yellow); color: var(--blue); }
+    .button-outline:hover { background: var(--white); }
+    .hero-art {
+      position: relative;
+      min-width: 0;
+      padding: 12px 12px 19px;
+      border: 5px solid var(--blue);
+      border-radius: 22px;
+      background: var(--red);
+      box-shadow: 6px 7px 0 var(--blue);
+    }
+    .hero-art img {
+      width: 100%;
+      height: clamp(240px, 31vw, 320px);
+      display: block;
+      border: 3px solid var(--blue);
+      border-radius: 12px;
+      background: #293357;
+      object-fit: contain;
+      object-position: center;
+      transition: opacity .22s ease;
+    }
+    .slide-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 9px 0 1px;
+    }
+    .slide-arrow {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border: 2px solid var(--blue);
+      border-radius: 50%;
+      background: var(--yellow);
+      color: var(--blue);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .slide-dots { display: flex; align-items: center; justify-content: center; gap: 7px; }
+    .slide-dot {
+      width: 10px;
+      height: 10px;
+      padding: 0;
+      border: 2px solid var(--blue);
+      border-radius: 50%;
+      background: var(--white);
+      cursor: pointer;
+    }
+    .slide-dot[aria-current="true"] { background: var(--yellow); transform: scale(1.2); }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+    }
+    .section {
+      width: min(100% - 56px, 1160px);
+      margin: 0 auto;
+      padding: 94px 0;
+      scroll-margin-top: 28px;
+    }
+    .section-label {     color: var(--blue); }
+    .section-heading {
+      margin: 12px 0 18px;
+      color: var(--blue);
+      font-size: clamp(32px, 4.5vw, 48px);
+      font-weight: 400;
+      letter-spacing: -.035em;
+      line-height: 1.05;
+      text-transform: uppercase;
+    }
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr .72fr;
+      align-items: center;
+      gap: clamp(36px, 8vw, 110px);
+    }
+    .about-copy p:not(.section-label) {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+    .about-portrait {
+      position: relative;
+      width: min(100%, 360px);
+      justify-self: center;
+      margin: 0;
+      padding: 11px;
+      border: 4px solid var(--blue);
+      border-radius: 8px;
+      background: var(--yellow);
+      box-shadow: 7px 7px 0 var(--red);
+    }
+    .about-portrait img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      display: block;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+    .about-portrait figcaption {
+      padding: 12px 5px 2px;
+      color: var(--blue);
+      border: 3px solid var(--blue);
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 800;
+      text-align: center;
+    }
+    .portfolio {
+      width: 100%;
+      padding: 16px max(28px, calc((100vw - 1160px) / 2)) 84px;
+      background: var(--sky);
+      color: var(--blue);
+    }
+    .portfolio-inner { width: min(100%, 1160px); margin: 0 auto; }
+    .portfolio .section-label { color: var(--blue); }
+    .portfolio .section-heading { color: var(--blue); }
+    .section-intro {
+      max-width: 580px;
+      margin-bottom: 34px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .art-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .art-card {
+      overflow: hidden;
+      border: 3px solid var(--blue);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 3px 4px 0 var(--blue);
+      color: var(--ink);
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .art-card:hover { box-shadow: 6px 7px 0 var(--red); transform: translateY(-3px); }
+    .art-card img {
+      width: 100%;
+      height: clamp(170px, 21vw, 240px);
+      display: block;
+      background: #eee;
+      object-fit: cover;
+      object-position: center;
+    }
+    .upcoming {
+      padding-top: 68px;
+      padding-bottom: 68px;
+    }
+    .upcoming-card {
+      overflow: hidden;
+      border: 3px solid var(--blue);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 4px 4px 0 var(--blue);
+    }
+    .upcoming-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 3px;
+      background: var(--blue);
+    }
+    .upcoming-gallery img, .upcoming-gallery video {
+      width: 100%;
+      height: clamp(220px, 32vw, 360px);
+      display: block;
+      background: var(--blue);
+      object-fit: contain;
+    }
+    .upcoming-copy { padding: 24px 28px 28px; }
+    .upcoming-copy .project-status {
+      margin-bottom: 8px;
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .upcoming-copy h3 {
+      margin-bottom: 10px;
+      color: var(--blue);
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+    .upcoming-copy > p:last-child {
+      margin-bottom: 0;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr .85fr;
+      align-items: start;
+      gap: 56px;
+      padding: 72px;
+      border: 3px solid var(--blue);
+      border-radius: 12px;
+      background: var(--sky);
+      box-shadow: 6px 6px 0 var(--red);
+    }
+    .contact .section-heading { margin-bottom: 14px; }
+    .contact-copy > p:not(.section-label) {
+      max-width: 460px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .contact-form { display: grid; gap: 14px; }
+    .contact-form label {
+      display: grid;
+      gap: 7px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid var(--blue);
+      border-radius: 6px;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 15px;
+    }
+    .contact-form textarea { min-height: 110px; resize: vertical; }
+    .contact-form .button {
+      justify-self: start;
+      background: var(--yellow);
+      color: var(--blue);
+      cursor: pointer;
+    }
+    .form-note { min-height: 18px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px max(28px, calc((100vw - 1160px) / 2)) 26px;
+      background: var(--sky);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .site-footer a { text-decoration-color: var(--red); text-underline-offset: 4px; }
+    @media (max-width: 760px) {
+      .site-header { min-height: 76px; padding-inline: 20px; }
+      .header-tools { gap: 10px; }
+      .site-nav { gap: 8px; }
+      .site-nav a { font-size: 12px; }
+      .theme-picker { gap: 6px; }
+      .hero-inner { width: min(100% - 40px, 560px); grid-template-columns: 1fr; gap: 35px; padding: 48px 0 54px; }
+      .hero h1 { font-size: clamp(48px, 12vw, 68px); }
+      .hero-art { width: calc(100% - 14px); margin: 0 auto; }
+      .hero-art img { height: clamp(240px, 70vw, 360px); }
+      .section { width: min(100% - 40px, 560px); padding: 72px 0; }
+      .about-layout, .contact { grid-template-columns: 1fr; gap: 30px; }
+      .portfolio { padding: 12px 20px 72px; }
+      .art-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+      .upcoming { padding-top: 52px; padding-bottom: 52px; }
+      .upcoming-gallery img, .upcoming-gallery video { height: clamp(180px, 42vw, 280px); }
+      .upcoming-copy { padding: 20px; }
+      .art-card { border-width: 4px; }
+      .art-card img { height: clamp(170px, 38vw, 250px); }
+      .contact { padding: 32px 24px; }
+      .site-footer { align-items: flex-start; flex-direction: column; padding-inline: 20px; }
+    }
+    @media (max-width: 460px) {
+      .site-header { align-items: flex-start; flex-direction: column; justify-content: center; gap: 7px; padding-block: 12px; }
+      .header-tools { width: 100%; justify-content: space-between; gap: 8px; }
+      .site-nav { flex: 1; justify-content: space-between; gap: 6px; }
+      .site-nav a { padding: 7px 10px; }
+      .theme-picker-label { display: none; }
+      .hero-inner { padding-top: 38px; }
+      .hero h1 { font-size: clamp(43px, 13vw, 54px); }
+      .art-grid { grid-template-columns: 1fr; }
+      .upcoming-gallery { grid-template-columns: 1fr; }
+      .upcoming-gallery img, .upcoming-gallery video { height: 270px; }
+      .art-card img { height: 280px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="viewport-checker viewport-checker-top" aria-hidden="true"></div>
+  <div class="viewport-checker viewport-checker-right" aria-hidden="true"></div>
+  <div class="viewport-checker viewport-checker-bottom" aria-hidden="true"></div>
+  <div class="viewport-checker viewport-checker-left" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="#home">KATY YURASH<span>DIGITAL ARTIST</span></a>
+    <div class="header-tools">
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="#portfolio">Work</a>
+        <a href="#upcoming">Upcoming</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="theme-picker" role="group" aria-label="Choose website colors">
+        <span class="theme-picker-label">Colors</span>
+        <button class="theme-swatch" type="button" data-theme-choice="sky" aria-label="Sky blue color theme" aria-pressed="true"></button>
+        <button class="theme-swatch" type="button" data-theme-choice="sunset" aria-label="Sunset color theme" aria-pressed="false"></button>
+        <button class="theme-swatch" type="button" data-theme-choice="lavender" aria-label="Lavender color theme" aria-pressed="false"></button>
+        <button class="theme-swatch" type="button" data-theme-choice="mint" aria-label="Mint color theme" aria-pressed="false"></button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">On the air</p>
+          <h1>Cartoons.<br>Nostalgia.<br>Creation</h1>
+          <p>Cartoonist and digital artist in the San Francisco Bay Area. I make characters, fanart, and stop motion as SparkToons.</p>
+          <div class="hero-actions">
+            <a class="button" href="#portfolio">See the show <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="hero-art" role="region" aria-label="Featured artwork slideshow" aria-roledescription="carousel">
+          <a class="hero-slide-link" href="assets/super-sponge.png" target="_blank" rel="noreferrer" role="group" aria-roledescription="slide" aria-label="1 of 6: Super Sponge">
+            <img class="hero-slide-image" src="assets/super-sponge.png" alt="Super Sponge cartoon character illustration">
+          </a>
+          <div class="slide-controls">
+            <button class="slide-arrow" type="button" data-slide-step="-1" aria-label="Show previous artwork">‹</button>
+            <div class="slide-dots" role="group" aria-label="Choose featured artwork">
+              <button class="slide-dot" type="button" aria-label="Show artwork 1 of 6" aria-current="true"></button>
+              <button class="slide-dot" type="button" aria-label="Show artwork 2 of 6" aria-current="false"></button>
+              <button class="slide-dot" type="button" aria-label="Show artwork 3 of 6" aria-current="false"></button>
+              <button class="slide-dot" type="button" aria-label="Show artwork 4 of 6" aria-current="false"></button>
+              <button class="slide-dot" type="button" aria-label="Show artwork 5 of 6" aria-current="false"></button>
+              <button class="slide-dot" type="button" aria-label="Show artwork 6 of 6" aria-current="false"></button>
+            </div>
+            <button class="slide-arrow" type="button" data-slide-step="1" aria-label="Show next artwork">›</button>
+          </div>
+          <p class="sr-only" id="slide-announcement" aria-live="polite" aria-atomic="true"></p>
+        </div>
+      </div>
+    </section>
+    <section class="portfolio" id="portfolio">
+      <div class="portfolio-inner">
+        <p class="section-label">Now showing</p>
+        <h2 class="section-heading">Recent illustration, character design, and fanart.</h2>
+        <p class="section-intro">A few colorful characters and illustrations from my portfolio. More stuff is always on the way!</p>
+        <div class="art-grid">
+          <a class="art-card" href="assets/super-sponge.png" target="_blank" rel="noreferrer">
+            <img src="assets/super-sponge.png" alt="Super Sponge cartoon character illustration" loading="lazy">
+          </a>
+          <a class="art-card" href="assets/boinkus.png" target="_blank" rel="noreferrer">
+            <img src="assets/boinkus.png" alt="Boinkus cartoon character illustration" loading="lazy">
+          </a>
+          <a class="art-card" href="assets/bonk-heeler.png" target="_blank" rel="noreferrer">
+            <img src="assets/bonk-heeler.png" alt="Bonk Heeler character illustration" loading="lazy">
+          </a>
+          <a class="art-card" href="assets/reggie.png" target="_blank" rel="noreferrer">
+            <img src="assets/reggie.png" alt="Reggie cartoon character illustration" loading="lazy">
+          </a>
+          <a class="art-card" href="assets/sparky.png" target="_blank" rel="noreferrer">
+            <img src="assets/sparky.png" alt="Sparky character artwork" loading="lazy">
+          </a>
+          <a class="art-card" href="assets/recent-project.jpg" target="_blank" rel="noreferrer">
+            <img src="assets/recent-project.jpg" alt="A colorful cartoon character artwork displayed on a red backdrop" loading="lazy">
+          </a>
+          <a class="art-card" href="https://aschonauer.itch.io/flippys-avalanche-escape" target="_blank" rel="noopener noreferrer" aria-label="Play Flippy's Avalanche Escape on itch.io">
+            <img src="assets/flippys-avalanche-escape.png" alt="Gameplay from Flippy's Avalanche Escape" loading="lazy">
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="section upcoming" id="upcoming">
+      <p class="section-label">Coming soon</p>
+      <h2 class="section-heading">Upcoming projects</h2>
+      <article class="upcoming-card">
+        <div class="upcoming-gallery" aria-label="Toon to Life project images">
+          <video controls playsinline loop preload="metadata" poster="assets/toon-to-life-claymation.png" aria-label="Play the Toon to Life animation clip">
+            <source src="assets/toon-to-life-juggle.mp4" type="video/mp4">
+            Your browser does not support the video element.
+          </video>
+          <img src="assets/toon-to-life-claymation.png" alt="Handmade clay character for Toon to Life" loading="lazy">
+          <img src="assets/toon-to-life-animation.png" alt="2D animated character sketch for Toon to Life" loading="lazy">
+        </div>
+        <div class="upcoming-copy">
+          <p class="project-status">In the works</p>
+          <h3>Toon to Life</h3>
+          <p>An upcoming shortfilm combining Claymation, 2D animation, and Live action video. Staring my original Character, Sparky!</p>
+        </div>
+      </article>
+    </section>
+    <section class="section about" id="about">
+      <div class="about-layout">
+        <div class="about-copy">
+          <p class="section-label">A little about me</p>
+          <h2 class="section-heading">Hi, I'm Katy!</h2>
+          <p>I'm a cartoonist, illustrator, stop-motion, and digital media artist in the San Francisco Bay Area. I'm currently studying Digital Media Art at San Jose State University.</p>
+          <p>Cartoons, nostalgia, and video games inspire my colorful style. I'm also the artist behind SparkToons, and you can find me sharing my work and vending at local fan conventions.</p>
+        </div>
+        <figure class="about-portrait">
+          <img src="assets/about-katy.png" alt="Katy smiling outdoors in a colorful cap and sunglasses" loading="lazy">
+          <figcaption>Hi, I'm Katy!</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="section" id="contact">
+      <div class="contact">
+        <div class="contact-copy">
+          <p class="section-label">Get in touch</p>
+          <h2 class="section-heading">Let's make something creative.</h2>
+          <p>Have a question, commission idea, or just want to say hi? Leave me an email.</p>
+        </div>
+        <form class="contact-form" id="contact-form">
+          <label for="sender-name">Your name
+            <input id="sender-name" name="name" autocomplete="name" required>
+          </label>
+          <label for="sender-email">Your email
+            <input id="sender-email" name="email" type="email" autocomplete="email" required>
+          </label>
+          <label for="sender-message">Your message
+            <textarea id="sender-message" name="message" required></textarea>
+          </label>
+          <button class="button" type="submit">Prepare a note <span aria-hidden="true">↗</span></button>
+          <p class="form-note" id="contact-status" aria-live="polite">This opens your email app; add the recipient address before sending.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <span>Katy Yurash · SparkToons · 2026 </span>
+    <a href="#home">Back to the top ↑</a>
+  </footer>
+  <script>
+    const availableThemes = new Set(["sky", "sunset", "lavender", "mint"]);
+    const themeButtons = [...document.querySelectorAll(".theme-swatch")];
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+
+    const applyTheme = (theme, persist = false) => {
+      if (!availableThemes.has(theme)) return;
+      document.documentElement.dataset.theme = theme;
+      themeButtons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.themeChoice === theme));
+      });
+      themeColorMeta.content = getComputedStyle(document.documentElement).getPropertyValue("--sky").trim();
+      if (persist) {
+        try {
+          localStorage.setItem("katy-portfolio-theme", theme);
+        } catch (error) {
+          console.warn("Could not save the selected color theme.", error);
+        }
+      }
+    };
+
+    let savedTheme;
+    try {
+      savedTheme = localStorage.getItem("katy-portfolio-theme");
+    } catch (error) {
+      console.warn("Could not load the saved color theme.", error);
+    }
+    applyTheme(availableThemes.has(savedTheme) ? savedTheme : "sky");
+    themeButtons.forEach((button) => {
+      button.addEventListener("click", () => applyTheme(button.dataset.themeChoice, true));
+    });
+
+    const featuredArt = [
+      { title: "Super Sponge", src: "assets/super-sponge.png", alt: "Super Sponge cartoon character illustration" },
+      { title: "Boinkus", src: "assets/boinkus.png", alt: "Boinkus cartoon character illustration" },
+      { title: "Character illustration", src: "assets/bonk-heeler.png", alt: "Bonk Heeler character illustration" },
+      { title: "Reggie", src: "assets/reggie.png", alt: "Reggie cartoon character illustration" },
+      { title: "Sparky", src: "assets/sparky.png", alt: "Sparky character artwork" },
+      { title: "Recent character art", src: "assets/recent-project.jpg", alt: "A colorful cartoon character artwork displayed on a red backdrop" }
+    ];
+    const slideImage = document.querySelector(".hero-slide-image");
+    const slideLink = document.querySelector(".hero-slide-link");
+    const slideAnnouncement = document.querySelector("#slide-announcement");
+    const slideDots = [...document.querySelectorAll(".slide-dot")];
+    const slideRegion = document.querySelector(".hero-art");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let currentSlide = 0;
+    let rotationTimer;
+
+    const showSlide = (index, announce = false) => {
+      currentSlide = (index + featuredArt.length) % featuredArt.length;
+      const artwork = featuredArt[currentSlide];
+      slideImage.style.opacity = "0";
+      window.setTimeout(() => {
+        slideImage.src = artwork.src;
+        slideImage.alt = artwork.alt;
+        slideLink.href = artwork.src;
+        slideLink.setAttribute("aria-label", `${currentSlide + 1} of ${featuredArt.length}: ${artwork.title}`);
+        slideImage.style.opacity = "1";
+      }, 120);
+      slideDots.forEach((dot, dotIndex) => {
+        dot.setAttribute("aria-current", String(dotIndex === currentSlide));
+      });
+      if (announce) {
+        slideAnnouncement.textContent = `Artwork ${currentSlide + 1} of ${featuredArt.length}: ${artwork.title}`;
+      }
+    };
+
+    const stopRotation = () => {
+      window.clearInterval(rotationTimer);
+      rotationTimer = undefined;
+    };
+    const startRotation = () => {
+      stopRotation();
+      if (
+        !reducedMotion.matches &&
+        !document.hidden &&
+        !slideRegion.matches(":hover") &&
+        !slideRegion.contains(document.activeElement)
+      ) {
+        rotationTimer = window.setInterval(() => showSlide(currentSlide + 1), 5000);
+      }
+    };
+
+    slideRegion.querySelectorAll("[data-slide-step]").forEach((button) => {
+      button.addEventListener("click", () => {
+        showSlide(currentSlide + Number(button.dataset.slideStep), true);
+        startRotation();
+      });
+    });
+    slideDots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        showSlide(index, true);
+        startRotation();
+      });
+    });
+    slideRegion.addEventListener("mouseenter", stopRotation);
+    slideRegion.addEventListener("mouseleave", startRotation);
+    slideRegion.addEventListener("focusin", stopRotation);
+    slideRegion.addEventListener("focusout", (event) => {
+      if (!slideRegion.contains(event.relatedTarget)) startRotation();
+    });
+    document.addEventListener("visibilitychange", startRotation);
+    reducedMotion.addEventListener("change", startRotation);
+    startRotation();
+
+    document.querySelector("#contact-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const form = new FormData(event.currentTarget);
+      const subject = encodeURIComponent(`A note from ${form.get("name")}`);
+      const body = encodeURIComponent(`${form.get("message")}\n\nReply to: ${form.get("email")}`);
+      document.querySelector("#contact-status").textContent =
+        "Your email app should open with the note ready. Add the recipient address before sending.";
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
