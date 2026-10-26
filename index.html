@@ -356,6 +356,7 @@
     }
     .art-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
     .art-card {
+      align-self: start;
       overflow: hidden;
       border: 3px solid var(--blue);
       border-radius: 8px;
@@ -366,7 +367,7 @@
       transition: transform .2s ease, box-shadow .2s ease;
     }
     .art-card:hover { box-shadow: 6px 7px 0 var(--red); transform: translateY(-3px); }
-    .art-card img {
+    .art-card img, .art-card video {
       width: 100%;
       height: clamp(170px, 21vw, 240px);
       display: block;
@@ -374,11 +375,27 @@
       object-fit: cover;
       object-position: center;
     }
+    .art-card iframe {
+      width: 100%;
+      height: clamp(170px, 21vw, 240px);
+      display: block;
+      border: 0;
+      background: #eee;
+    }
+    .art-card-caption {
+      margin: 0;
+      padding: 10px 12px;
+      color: var(--blue);
+      font-size: 16px;
+      line-height: 1.3;
+    }
     .upcoming {
       padding-top: 68px;
       padding-bottom: 68px;
     }
     .upcoming-card {
+      display: grid;
+      grid-template-columns: 1fr;
       overflow: hidden;
       border: 3px solid var(--blue);
       border-radius: 8px;
@@ -389,6 +406,7 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 3px;
+      min-width: 0;
       background: var(--blue);
     }
     .upcoming-gallery img, .upcoming-gallery video {
@@ -493,7 +511,7 @@
       .upcoming-gallery img, .upcoming-gallery video { height: clamp(180px, 42vw, 280px); }
       .upcoming-copy { padding: 20px; }
       .art-card { border-width: 4px; }
-      .art-card img { height: clamp(170px, 38vw, 250px); }
+      .art-card img, .art-card video, .art-card iframe { height: clamp(170px, 38vw, 250px); }
       .contact { padding: 32px 24px; }
       .site-footer { align-items: flex-start; flex-direction: column; padding-inline: 20px; }
     }
@@ -508,7 +526,7 @@
       .art-grid { grid-template-columns: 1fr; }
       .upcoming-gallery { grid-template-columns: 1fr; }
       .upcoming-gallery img, .upcoming-gallery video { height: 270px; }
-      .art-card img { height: 280px; }
+      .art-card img, .art-card video, .art-card iframe { height: 280px; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -544,8 +562,8 @@
       <div class="hero-inner">
         <div class="hero-copy">
           <p class="eyebrow">On the air</p>
-          <h1>Cartoons.<br>Nostalgia.<br>Creation</h1>
-          <p>Cartoonist and digital artist in the San Francisco Bay Area. I make characters, fanart, and stop motion as SparkToons.</p>
+          <h1>Cartoons,<br>Innovation,<br>Creation!</h1>
+          <p>Cartoonist & digital media artist from the San Francisco Bay Area. I bring a spark of ideas for original characters, coding projects, and stop motion media to life. I post artwork online under my Artist persona, Sparktoons!</p>
           <div class="hero-actions">
             <a class="button" href="#portfolio">See the show <span aria-hidden="true">↗</span></a>
           </div>
@@ -557,12 +575,11 @@
           <div class="slide-controls">
             <button class="slide-arrow" type="button" data-slide-step="-1" aria-label="Show previous artwork">‹</button>
             <div class="slide-dots" role="group" aria-label="Choose featured artwork">
-              <button class="slide-dot" type="button" aria-label="Show artwork 1 of 6" aria-current="true"></button>
-              <button class="slide-dot" type="button" aria-label="Show artwork 2 of 6" aria-current="false"></button>
-              <button class="slide-dot" type="button" aria-label="Show artwork 3 of 6" aria-current="false"></button>
-              <button class="slide-dot" type="button" aria-label="Show artwork 4 of 6" aria-current="false"></button>
-              <button class="slide-dot" type="button" aria-label="Show artwork 5 of 6" aria-current="false"></button>
-              <button class="slide-dot" type="button" aria-label="Show artwork 6 of 6" aria-current="false"></button>
+              <button class="slide-dot" type="button" aria-label="Show artwork 1 of 5" aria-current="true"></button>
+              <button class="slide-dot" type="button" aria-label="Show artwork 2 of 5" aria-current="false"></button>
+              <button class="slide-dot" type="button" aria-label="Show artwork 3 of 5" aria-current="false"></button>
+              <button class="slide-dot" type="button" aria-label="Show artwork 4 of 5" aria-current="false"></button>
+              <button class="slide-dot" type="button" aria-label="Show artwork 5 of 5" aria-current="false"></button>
             </div>
             <button class="slide-arrow" type="button" data-slide-step="1" aria-label="Show next artwork">›</button>
           </div>
@@ -573,8 +590,8 @@
     <section class="portfolio" id="portfolio">
       <div class="portfolio-inner">
         <p class="section-label">Now showing</p>
-        <h2 class="section-heading">Recent illustration, character design, and fanart.</h2>
-        <p class="section-intro">A few colorful characters and illustrations from my portfolio. More stuff is always on the way!</p>
+        <h2 class="section-heading">Recent Digital, illustration, and animation work</h2>
+        <p class="section-intro">A few colorful creations from my portfolio. More stuff is always on the way!</p>
         <div class="art-grid">
           <a class="art-card" href="assets/super-sponge.png" target="_blank" rel="noreferrer">
             <img src="assets/super-sponge.png" alt="Super Sponge cartoon character illustration" loading="lazy">
@@ -582,40 +599,62 @@
           <a class="art-card" href="assets/boinkus.png" target="_blank" rel="noreferrer">
             <img src="assets/boinkus.png" alt="Boinkus cartoon character illustration" loading="lazy">
           </a>
-          <a class="art-card" href="assets/bonk-heeler.png" target="_blank" rel="noreferrer">
-            <img src="assets/bonk-heeler.png" alt="Bonk Heeler character illustration" loading="lazy">
-          </a>
           <a class="art-card" href="assets/reggie.png" target="_blank" rel="noreferrer">
             <img src="assets/reggie.png" alt="Reggie cartoon character illustration" loading="lazy">
           </a>
           <a class="art-card" href="assets/sparky.png" target="_blank" rel="noreferrer">
             <img src="assets/sparky.png" alt="Sparky character artwork" loading="lazy">
           </a>
-          <a class="art-card" href="assets/recent-project.jpg" target="_blank" rel="noreferrer">
-            <img src="assets/recent-project.jpg" alt="A colorful cartoon character artwork displayed on a red backdrop" loading="lazy">
+          <a class="art-card" href="assets/sparky-in-real-life.png" target="_blank" rel="noreferrer">
+            <img src="assets/sparky-in-real-life.png" alt="Katy with Sparky the cartoon dog" loading="lazy">
+          </a>
+          <a class="art-card" href="assets/sunday-playzone.png" target="_blank" rel="noreferrer">
+            <img src="assets/sunday-playzone.png" alt="Cartoon dog performing on a colorful playzone stage" loading="lazy">
+          </a>
+          <a class="art-card" href="https://spark-toons.github.io/toonquest/comicintro.html" target="_blank" rel="noopener noreferrer">
+            <img src="assets/toon-quest.png" alt="Toon Quest welcome illustration" loading="lazy">
+            <h3 class="art-card-caption">HTML browser adventure game - Art 74</h3>
           </a>
           <a class="art-card" href="https://aschonauer.itch.io/flippys-avalanche-escape" target="_blank" rel="noopener noreferrer" aria-label="Play Flippy's Avalanche Escape on itch.io">
             <img src="assets/flippys-avalanche-escape.png" alt="Gameplay from Flippy's Avalanche Escape" loading="lazy">
+            <h3 class="art-card-caption">Flippy's Avalanche Escape - Unity Game</h3>
           </a>
+          <div class="art-card">
+            <video controls playsinline loop preload="metadata" aria-label="Play animated portfolio video">
+              <source src="assets/animated-v2.mp4" type="video/mp4">
+              Your browser does not support the video element.
+            </video>
+            <h3 class="art-card-caption">"Animated" Claymation</h3>
+          </div>
+          <article class="art-card">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/UHgtG9rScJ4?start=38&end=50"
+              title="Kirby Collab"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+            <h3 class="art-card-caption">Kirby Collab</h3>
+          </article>
         </div>
       </div>
     </section>
     <section class="section upcoming" id="upcoming">
-      <p class="section-label">Coming soon</p>
+
       <h2 class="section-heading">Upcoming projects</h2>
       <article class="upcoming-card">
         <div class="upcoming-gallery" aria-label="Toon to Life project images">
-          <video controls playsinline loop preload="metadata" poster="assets/toon-to-life-claymation.png" aria-label="Play the Toon to Life animation clip">
+          <video controls playsinline loop preload="metadata" poster="assets/toon-to-life-juggle.gif" aria-label="Play the Toon to Life animation clip">
             <source src="assets/toon-to-life-juggle.mp4" type="video/mp4">
             Your browser does not support the video element.
           </video>
           <img src="assets/toon-to-life-claymation.png" alt="Handmade clay character for Toon to Life" loading="lazy">
-          <img src="assets/toon-to-life-animation.png" alt="2D animated character sketch for Toon to Life" loading="lazy">
         </div>
         <div class="upcoming-copy">
-          <p class="project-status">In the works</p>
+
           <h3>Toon to Life</h3>
-          <p>An upcoming shortfilm combining Claymation, 2D animation, and Live action video. Staring my original Character, Sparky!</p>
+          <p>An upcoming short film combining Claymation, 2D animation, and Live action video. Starring my original Character, Sparky the toon dog!</p>
         </div>
       </article>
     </section>
@@ -625,11 +664,11 @@
           <p class="section-label">A little about me</p>
           <h2 class="section-heading">Hi, I'm Katy!</h2>
           <p>I'm a cartoonist, illustrator, stop-motion, and digital media artist in the San Francisco Bay Area. I'm currently studying Digital Media Art at San Jose State University.</p>
-          <p>Cartoons, nostalgia, and video games inspire my colorful style. I'm also the artist behind SparkToons, and you can find me sharing my work and vending at local fan conventions.</p>
+          <p>Cartoons, 90s nostalgia, and video games inspire my bold & colorful artstyle. I'm also the artist behind the brand SparkToons. You can find my work online and catch me selling my art at local fan conventions.</p>
         </div>
         <figure class="about-portrait">
           <img src="assets/about-katy.png" alt="Katy smiling outdoors in a colorful cap and sunglasses" loading="lazy">
-          <figcaption>Hi, I'm Katy!</figcaption>
+          <figcaption>​"Inspiration can come from anywhere, so always carry a sketchbook!"!</figcaption>
         </figure>
       </div>
     </section>
@@ -638,7 +677,7 @@
         <div class="contact-copy">
           <p class="section-label">Get in touch</p>
           <h2 class="section-heading">Let's make something creative.</h2>
-          <p>Have a question, commission idea, or just want to say hi? Leave me an email.</p>
+          <p>Have a question, inquire about a commission, or just want to say hi? Leave me an email.</p>
         </div>
         <form class="contact-form" id="contact-form">
           <label for="sender-name">Your name
@@ -695,7 +734,6 @@
     const featuredArt = [
       { title: "Super Sponge", src: "assets/super-sponge.png", alt: "Super Sponge cartoon character illustration" },
       { title: "Boinkus", src: "assets/boinkus.png", alt: "Boinkus cartoon character illustration" },
-      { title: "Character illustration", src: "assets/bonk-heeler.png", alt: "Bonk Heeler character illustration" },
       { title: "Reggie", src: "assets/reggie.png", alt: "Reggie cartoon character illustration" },
       { title: "Sparky", src: "assets/sparky.png", alt: "Sparky character artwork" },
       { title: "Recent character art", src: "assets/recent-project.jpg", alt: "A colorful cartoon character artwork displayed on a red backdrop" }
