@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#b8eff8">
+  <meta name="description" content="Learn more about a piece from Katy Yurash's portfolio.">
+  <title>Artwork | Katy Yurash</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --red: #f04b56;
+      --blue: #173d5b;
+      --ink: #18384f;
+      --muted: #38566b;
+      --yellow: #f5eb36;
+      --sky: #aeeaf6;
+      --white: #fff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      font-family: "Montserrat", sans-serif;
+      background: var(--sky);
+    }
+    a { color: inherit; }
+    a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+    .site-header {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 0 max(28px, calc((100vw - 1060px) / 2));
+    }
+    .brand {
+      display: grid;
+      gap: 2px;
+      color: var(--blue);
+      font-family: "Lilita One", "Arial Rounded MT Bold", sans-serif;
+      font-size: clamp(18px, 2vw, 25px);
+      letter-spacing: .015em;
+      text-decoration: none;
+    }
+    .brand span {
+      font-family: "Montserrat", sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .13em;
+    }
+    .home-link {
+      padding: 8px 14px;
+      border: 2px solid var(--blue);
+      border-radius: 20px;
+      background: var(--yellow);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .artwork {
+      width: min(100% - 56px, 1060px);
+      margin: 0 auto;
+      padding: 52px 0 76px;
+    }
+    .gallery-heading {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-size: clamp(38px, 5vw, 58px);
+      font-weight: 400;
+      line-height: 1;
+    }
+    .gallery-intro {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .art-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .art-card {
+      display: block;
+      overflow: hidden;
+      border: 3px solid var(--blue);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 3px 4px 0 var(--blue);
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .art-card:hover { box-shadow: 6px 7px 0 var(--red); transform: translateY(-3px); }
+    .art-card img {
+      width: 100%;
+      height: clamp(180px, 24vw, 260px);
+      display: block;
+      background: var(--white);
+      object-fit: cover;
+    }
+    .art-card h2 {
+      margin: 0;
+      padding: 12px;
+      color: var(--blue);
+      font-size: 20px;
+      font-weight: 400;
+    }
+    .artwork-detail {
+      margin-top: 68px;
+      padding-top: 42px;
+      border-top: 3px solid var(--blue);
+    }
+    .artwork-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+      align-items: center;
+      gap: clamp(28px, 6vw, 72px);
+    }
+    .artwork-image {
+      width: 100%;
+      max-height: 72vh;
+      display: block;
+      border: 5px solid var(--blue);
+      border-radius: 12px;
+      background: var(--white);
+      box-shadow: 6px 6px 0 var(--blue);
+      object-fit: contain;
+    }
+    .artwork-image[data-piece="sparky-in-real-life"],
+    .artwork-image[data-piece="super-sponge"],
+    .artwork-image[data-piece="boinkus"] {
+      background: transparent;
+    }
+    .section-label {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 { font-family: "Lilita One", "Arial Rounded MT Bold", sans-serif; }
+    .piece-title {
+      margin: 0 0 28px;
+      color: var(--blue);
+      font-size: clamp(38px, 5vw, 58px);
+      font-weight: 400;
+      line-height: 1;
+    }
+    .about-piece {
+      padding: 24px;
+      border: 3px solid var(--blue);
+      border-radius: 10px;
+      background: var(--white);
+      box-shadow: 4px 4px 0 var(--red);
+    }
+    .about-piece h3 {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-size: 26px;
+      font-weight: 400;
+    }
+    .about-piece p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .error-message {
+      width: min(100% - 56px, 680px);
+      margin: 60px auto;
+      padding: 28px;
+      border: 3px solid var(--blue);
+      border-radius: 10px;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    [hidden] { display: none !important; }
+    @media (max-width: 700px) {
+      .site-header { min-height: 72px; padding-inline: 20px; }
+      .artwork { width: min(100% - 40px, 560px); padding-top: 32px; }
+      .art-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+      .art-card img { height: clamp(160px, 38vw, 240px); }
+      .artwork-detail { margin-top: 52px; padding-top: 32px; }
+      .artwork-layout { grid-template-columns: 1fr; gap: 30px; }
+      .artwork-image { max-height: 60vh; }
+      .error-message { width: min(100% - 40px, 560px); }
+    }
+    @media (max-width: 460px) {
+      .art-grid { grid-template-columns: 1fr; }
+      .art-card img { height: 260px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">KATY YURASH<span>DIGITAL ARTIST</span></a>
+    <a class="home-link" href="index.html">Back to main page</a>
+  </header>
+  <main>
+    <section class="artwork" id="gallery">
+      <section class="artwork-detail" id="artwork-detail" hidden>
+        <div class="artwork-layout">
+          <img class="artwork-image" id="piece-image" alt="">
+          <div class="artwork-copy">
+            <p class="section-label">Portfolio piece</p>
+            <h2 id="piece-title" class="piece-title"></h2>
+            <section class="about-piece" aria-labelledby="about-title">
+              <h3 id="about-title">About the piece</h3>
+              <p id="piece-about"></p>
+            </section>
+          </div>
+        </div>
+      </section>
+      <h1 class="gallery-heading">Illustration Gallery</h1>
+      <p class="gallery-intro">Select a piece from the Gallery to learn more about it.</p>
+      <div class="art-grid" id="art-grid" aria-label="Artwork gallery"></div>
+    </section>
+    <section class="error-message" id="error-message" hidden>
+      <h2>Artwork not found</h2>
+      <p>Choose an artwork from the gallery above to learn more about it.</p>
+    </section>
+  </main>
+  <script>
+    const artworks = {
+      "super-sponge": {
+        title: "Super Sponge",
+        image: "assets/super-sponge.png",
+        alt: "Original rabbit character holding a skateboard against a textured purple backdrop",
+        about: "A Commission piece of a Rabbit character with a skateboard, paired with a 90s aesthetic background."
+      },
+      boinkus: {
+        title: "Boinkus",
+        image: "assets/boinkus.png",
+        alt: "Rounded white cartoon character surrounded by colorful shapes on a blue background",
+        about: "A playful character portrait featuring an original character, surrounded by a colorful, clay-textured background."
+      },
+      reggie: {
+        title: "Reggie",
+        image: "assets/reggie.png",
+        alt: "Green cartoon character with a remote and cassette in front of a retro television",
+        about: "Reggie appears alongside a retro television, remote, and cassette player in this nostalgic media-themed character illustration."
+      },
+      sparky: {
+        title: "Sparky",
+        image: "assets/sparky.png",
+        alt: "Cartoon character juggling colorful balls on a theater stage",
+        about: "A 3D rendered scene of my mascot Sparky juggling colorful balls on stage in front of a theater curtain."
+      },
+      "sparky-in-real-life": {
+        title: "Sparky in Real Life",
+        image: "assets/sparky-in-real-life.png",
+        alt: "Katy outdoors alongside her cartoon dog character Sparky",
+        about: "A real-life photo of a creator with their creation. Katy with Sparky."
+      },
+      "sunday-playzone": {
+        title: "Sunday Playzone",
+        image: "assets/sunday-playzone.png",
+        alt: "Cartoon dog character performing on a stage framed by red curtains",
+        about: "A bright stage scene featuring a cheerful dog character mid-performance, Glitched aesthetic with arcade carpet."
+      }
+    };
+    const artGrid = document.querySelector("#art-grid");
+    for (const [slug, item] of Object.entries(artworks)) {
+      const card = document.createElement("a");
+      card.className = "art-card";
+      card.href = `artwork.html?piece=${encodeURIComponent(slug)}#artwork-detail`;
+      const image = document.createElement("img");
+      image.src = item.image;
+      image.alt = item.alt;
+      image.loading = "lazy";
+      const title = document.createElement("h2");
+      title.textContent = item.title;
+      card.append(image, title);
+      artGrid.append(card);
+    }
+
+    const piece = new URLSearchParams(window.location.search).get("piece");
+    const artwork = Object.prototype.hasOwnProperty.call(artworks, piece) ? artworks[piece] : null;
+
+    if (artwork) {
+      document.title = `${artwork.title} | Katy Yurash`;
+      document.querySelector("#piece-title").textContent = artwork.title;
+      const pieceImage = document.querySelector("#piece-image");
+      pieceImage.src = artwork.image;
+      pieceImage.alt = artwork.alt;
+      pieceImage.dataset.piece = piece;
+      document.querySelector("#piece-about").textContent = artwork.about;
+      document.querySelector("#artwork-detail").hidden = false;
+    } else if (piece) {
+      document.querySelector("#error-message").hidden = false;
+    }
+  </script>
+</body>
+</html>
