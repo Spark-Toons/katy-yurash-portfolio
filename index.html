@@ -481,6 +481,16 @@
       cursor: pointer;
     }
     .form-note { min-height: 18px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .contact-link {
+      grid-column: 1 / -1;
+      margin: 0;
+      padding-top: 16px;
+      border-top: 2px solid var(--blue);
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .contact-link a { font-size: 16px; text-decoration-color: var(--red); text-underline-offset: 4px; }
     .site-footer {
       display: flex;
       align-items: center;
@@ -611,6 +621,10 @@
           <a class="art-card" href="assets/sunday-playzone.png" target="_blank" rel="noreferrer">
             <img src="assets/sunday-playzone.png" alt="Cartoon dog performing on a colorful playzone stage" loading="lazy">
           </a>
+          <a class="art-card" href="assets/blue-yellow-glitch-art.png" target="_blank" rel="noreferrer">
+            <img src="assets/blue-yellow-glitch-art.png" alt="Blue and yellow glitch-style abstract artwork with repeated circular forms" loading="lazy">
+            <h3 class="art-card-caption">Glitch Image (coding with audio file)</h3>
+          </a>
           <a class="art-card" href="https://spark-toons.github.io/toonquest/comicintro.html" target="_blank" rel="noopener noreferrer">
             <img src="assets/toon-quest.png" alt="Toon Quest welcome illustration" loading="lazy">
             <h3 class="art-card-caption">HTML browser adventure game - Art 74</h3>
@@ -618,6 +632,10 @@
           <a class="art-card" href="https://aschonauer.itch.io/flippys-avalanche-escape" target="_blank" rel="noopener noreferrer" aria-label="Play Flippy's Avalanche Escape on itch.io">
             <img src="assets/flippys-avalanche-escape.png" alt="Gameplay from Flippy's Avalanche Escape" loading="lazy">
             <h3 class="art-card-caption">Flippy's Avalanche Escape - Unity Game</h3>
+          </a>
+          <a class="art-card" href="https://spark-toons.github.io/diypokemon.html" target="_blank" rel="noopener noreferrer">
+            <img src="assets/diy-pokemon-cover.png" alt="DIY Pokémon Photoshop keyboard instructions with Pokémon logos and Poké Balls" loading="lazy">
+            <h3 class="art-card-caption">DIY Pokemon Photoshop - P5.js</h3>
           </a>
           <div class="art-card">
             <video controls playsinline loop preload="metadata" aria-label="Play animated portfolio video">
@@ -692,6 +710,7 @@
           <button class="button" type="submit">Prepare a note <span aria-hidden="true">↗</span></button>
           <p class="form-note" id="contact-status" aria-live="polite">This opens your email app; add the recipient address before sending.</p>
         </form>
+        <p class="contact-link">Find my other socials via <a href="https://linktr.ee/SparkToons" target="_blank" rel="noopener noreferrer">Linktree</a></p>
       </div>
     </section>
   </main>
